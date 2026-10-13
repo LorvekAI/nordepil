@@ -18,6 +18,7 @@
   function t(es, ca) { return '<span lang="es">' + es + '</span><span lang="ca">' + ca + "</span>"; }
   var ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.5a7.5 7.5 0 0 1-11.1 6.6L4 20l1-4.4A7.5 7.5 0 1 1 20 12.5z"/><path d="M9 11.5h.01M12.5 11.5h.01M16 11.5h.01" stroke-width="2.6"/></svg>';
   var ICON_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  var ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42z"/></svg>';
   var ICON_OUT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 
   var css = [
@@ -44,6 +45,12 @@
     ".np-close{width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}",
     ".np-close:hover{background:rgba(255,255,255,.26)}",
     ".np-close svg{width:20px;height:20px}",
+    ".np-expand{width:40px;height:40px;border-radius:50%;background:transparent;color:#fff;display:grid;place-items:center;flex:none;opacity:.85}",
+    ".np-expand:hover{background:rgba(255,255,255,.14);opacity:1}",
+    ".np-expand svg{width:18px;height:18px}",
+    ".np-wa{display:inline-flex!important;align-items:center;gap:8px!important;min-height:36px;padding:0 14px 0 11px;border-radius:999px;background:var(--np-ink);color:#fff!important;font-size:13px;font-weight:700;letter-spacing:.01em}",
+    ".np-wa:hover{background:#000}",
+    ".np-wa svg{width:17px!important;height:17px!important}",
     ".np-body{flex:1;min-height:0;position:relative;background:var(--np-paper)}",
     ".np-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}",
     ".np-loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--np-muted);font-size:.9rem}",
@@ -56,7 +63,7 @@
     ".np-cta:hover{background:var(--np-red-deep)}",
     ".np-cta svg{width:18px;height:18px}",
     ".np-note{font-size:.8rem;color:var(--np-muted)}",
-    ".np-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;border-top:1px solid rgba(43,39,37,.1);font-size:11px;color:var(--np-muted);background:var(--np-paper)}",
+    ".np-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid rgba(43,39,37,.1);font-size:11px;color:var(--np-muted);background:var(--np-paper)}",
     ".np-foot a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:5px}",
     ".np-foot a:hover{color:var(--np-ink)}",
     ".np-foot svg{width:13px;height:13px}",
@@ -83,11 +90,12 @@
       '<div class="np-top">' +
         '<img src="img/logo-blanco.png" alt="Nordepil" width="1702" height="474">' +
         '<div class="np-title"><b>' + t("Asistente", "Assistent") + "</b>" + t("Resolvemos tus dudas al momento", "Resolem els teus dubtes al moment") + "</div>" +
+        '<a class="np-expand" href="' + agentUrl + '" target="_blank" rel="noopener" aria-label="Abrir en pantalla completa" title="Abrir en pantalla completa">' + ICON_OUT + "</a>" +
         '<button class="np-close" type="button" aria-label="Cerrar">' + ICON_X + "</button>" +
       "</div>" +
       '<div class="np-body"></div>' +
       '<div class="np-foot">' +
-        '<a href="' + agentUrl + '" target="_blank" rel="noopener">' + t("Abrir en pantalla completa", "Obrir a pantalla completa") + ICON_OUT + "</a>" +
+        '<a class="np-wa" data-wa="agente-panel" href="https://wa.me/' + (cfg.whatsapp || "34698942826") + '" target="_blank" rel="noopener">' + ICON_WA + t("Escribir por WhatsApp", "Escriure per WhatsApp") + "</a>" +
         '<a href="' + lorvekUrl + '" target="_blank" rel="noopener">' + t("Desarrollado por Lorvek", "Desenvolupat per Lorvek") + "</a>" +
       "</div>" +
     "</div>" +
@@ -102,6 +110,14 @@
   var body = root.querySelector(".np-body");
   var launch = root.querySelector(".np-launch");
   var closeBtn = root.querySelector(".np-close");
+  var waBtn = root.querySelector(".np-wa");
+  function waHref() {
+    var lang = document.documentElement.getAttribute("data-lang") === "ca" ? "ca" : "es";
+    var msg = (cfg.waMessage && cfg.waMessage[lang]) || "";
+    return "https://wa.me/" + (cfg.whatsapp || "34698942826") + (msg ? "?text=" + encodeURIComponent(msg) : "");
+  }
+  ["pointerdown", "focus"].forEach(function (ev) { waBtn.addEventListener(ev, function () { waBtn.href = waHref(); }); });
+  waBtn.href = waHref();
   var hint = root.querySelector(".np-hint");
   var loaded = false;
 
