@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nordepil · Propuestas de web</title>
+<link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Urbanist:wght@800;900&display=swap">
+<style>
+  :root { --red: #F32A05; --ink: #2B2725; --muted: #7A706C; --cream: #F6F2EF; --hair: rgba(43,39,37,.14); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 17px/1.55 "Figtree", system-ui, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: clamp(48px, 9vw, 110px) 20px 48px; display: grid; gap: 36px; }
+  .eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-family: "Urbanist", system-ui, sans-serif; font-weight: 900; font-size: clamp(2.6rem, 1.6rem + 5vw, 5rem); line-height: .95; letter-spacing: -.04em; margin: 10px 0 0; }
+  h1 em { font-style: normal; color: var(--red); }
+  p { margin: 0; color: var(--muted); max-width: 56ch; }
+  .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+  .opt { display: grid; gap: 10px; padding: 28px 0; border-top: 2px solid var(--ink); text-decoration: none; color: inherit; }
+  .opt .n { font-family: "Urbanist", sans-serif; font-weight: 900; color: var(--red); font-size: 1rem; }
+  .opt h2 { font-family: "Urbanist", sans-serif; font-weight: 900; font-size: 2rem; margin: 0; letter-spacing: -.02em; }
+  .opt span.go { font-weight: 700; display: inline-flex; gap: 8px; align-items: center; }
+  .opt:hover h2, .opt:focus-visible h2 { color: var(--red); }
+  footer { font-size: .85rem; color: var(--muted); border-top: 1px solid var(--hair); padding-top: 20px; }
+  footer a { color: inherit; }
+  @media (max-width: 640px) { .options { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <span class="eyebrow">Nordepil · Igualada</span>
+    <h1>Dos propuestas<br>de <em>web nueva</em></h1>
+  </div>
+  <p>Las dos tienen el mismo contenido, castellano y catalán, y el asistente de preguntas frecuentes abajo a la derecha. Cambia el diseño.</p>
+  <div class="options">
+    <a class="opt" href="original/"><span class="n">01</span><h2>Original</h2><p>Más color y más rojo, con tarjetas y fotos en movimiento.</p><span class="go">Ver web →</span></a>
+    <a class="opt" href="editorial/"><span class="n">02</span><h2>Editorial</h2><p>Portada a pantalla completa, más aire y el rojo solo para lo importante.</p><span class="go">Ver web →</span></a>
+  </div>
+  <footer>Web y asistente: <a href="https://lorvekai.github.io/lorvekai-web/" target="_blank" rel="noopener">Lorvek</a></footer>
+</main>
+</body>
+</html>
